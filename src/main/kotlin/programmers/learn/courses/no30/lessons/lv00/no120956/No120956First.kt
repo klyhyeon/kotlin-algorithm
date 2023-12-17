@@ -1,4 +1,4 @@
-package programmers.learn.courses.no30.lessons.lv00
+package programmers.learn.courses.no30.lessons.lv00.no120956
 
 /* 옹알이 (1) */
 class No120956 {
