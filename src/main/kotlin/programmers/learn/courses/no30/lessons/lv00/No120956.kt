@@ -1,6 +1,8 @@
-package lv01
+package programmers.learn.courses.no30.lessons.lv00
 
-class Babbling {
+/* 옹알이 (1) */
+class No120956 {
+
 
   fun solution(babbling: Array<String>): Int {
     var answer = 0
@@ -34,5 +36,5 @@ class Babbling {
 
 fun main() {
 //  println(Babbling().solution(arrayOf("aya", "yee", "u", "maa", "wyeoo")))
-  println(Babbling().solution(arrayOf("ayaye", "uuuma", "ye", "yemawoo", "ayaa")))
+  println(No120956().solution(arrayOf("ayaye", "uuuma", "ye", "yemawoo", "ayaa")))
 }
