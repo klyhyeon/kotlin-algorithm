@@ -12,7 +12,7 @@ class No64061Second {
         val bucket = Stack<Int>()
         moves.forEach {
             for (i in board.indices) {
-                if (board[i][it - 1기] != 0) {
+                if (board[i][it - 1] != 0) {
                     if (bucket.isNotEmpty() && board[i][it - 1] == bucket.peek()) {
                         answer += 2
                         bucket.pop()
