@@ -6,7 +6,7 @@ import kotlin.math.min
 * - 실패
 * - 다른 사람 풀이보고 성공
 * */
-class No131128 {
+class No131128First {
 
     fun solution(X: String, Y: String): String {
         val list = mutableListOf<String>()
@@ -23,7 +23,7 @@ class No131128 {
 }
 
 fun main() {
-    println(No131128().solution(
+    println(No131128First().solution(
         "5525",
         "1255",
     ))
