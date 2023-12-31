@@ -2,6 +2,7 @@ package programmers.learn.courses.no30.lessons.lv01.no67256
 
 /* * 키패드 누르기(2020 카카오 인턴십)
 * - 실패(건드리지도 못함)
+* - 문제를 잘못읽고 앞서 포기함
 * */
 class No67256First {
 
