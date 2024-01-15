@@ -52,8 +52,25 @@ class No133502 {
         }
         return answer
     }
+
+    fun solution3(ingredient: IntArray): Int {
+        var answer: Int = 0
+        val collectList = LinkedList<Int>()
+        for (i in ingredient) {
+            val size = collectList.size
+            if (i == 1 && size >= 3) {
+                if (collectList[size - 1] == 3 && collectList[size - 2] == 2 && collectList[size - 3] == 1) {
+                    repeat(3) { collectList.pollLast() }
+                    answer++
+                    continue
+                }
+            }
+            collectList.offer(i)
+        }
+        return answer
+    }
 }
 
 fun main() {
-    println(No133502().solution2(intArrayOf(2, 1, 1, 2, 3, 1, 2, 3, 1)))
+    println(No133502().solution3(intArrayOf(2, 1, 1, 2, 3, 1, 2, 3, 1)))
 }
