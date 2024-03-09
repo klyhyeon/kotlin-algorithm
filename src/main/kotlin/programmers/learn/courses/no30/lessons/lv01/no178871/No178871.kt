@@ -22,11 +22,33 @@ class No178871 {
         return players
     }
 
+    fun solution2(players: Array<String>, callings: Array<String>): List<String>? {
+        val mappedPlayers = HashMap<String, Pair<Int, String?>>()
+        var idx = 0
+        players.forEach {
+            if (idx != 0) {
+                mappedPlayers.put(it, Pair(idx, players[idx - 1]))
+            } else {
+                mappedPlayers.put(it, Pair(0, null))
+            }
+            idx++
+        }
+        callings.forEach {
+            val pairIdxFormer = mappedPlayers.get(it)
+            val former = mappedPlayers.get(pairIdxFormer!!.second)
+            mappedPlayers.put(pairIdxFormer.second!!, Pair(former!!.first + 1, it))
+            mappedPlayers.put(it, Pair(pairIdxFormer.first - 1, former.second))
+        }
+        val list = mappedPlayers.toList().sortedBy { it.first }.map { it.first }
+        println(list)
+        return null
+    }
+
 }
 
 fun main() {
-    No178871().solution(
+    No178871().solution2(
         players = arrayOf("mumu", "soe", "poe", "kai", "mine"),
         callings = arrayOf("kai", "kai", "mine", "mine")
-    ).forEach { println(it) }
+    )?.forEach { println(it) }
 }
