@@ -44,10 +44,30 @@ class No178871 {
         return null
     }
 
+    fun solution3(players: Array<String>, callings: Array<String>): List<String> {
+        val nameMap = HashMap<String, Int>()
+        val rankMap = HashMap<Int, String>()
+        var idx = 0
+        players.forEach {
+            nameMap.put(it, idx)
+            rankMap.put(idx, it)
+            idx++
+        }
+        callings.forEach { currentRunnerName ->
+            val currentRunnerRank = nameMap.get(currentRunnerName)
+            val formerRunnerName = rankMap.get(currentRunnerRank!! - 1)
+            nameMap.put(formerRunnerName!!, currentRunnerRank)
+            nameMap.put(currentRunnerName, currentRunnerRank - 1)
+            rankMap.put(currentRunnerRank, formerRunnerName)
+            rankMap.put(currentRunnerRank - 1, currentRunnerName)
+        }
+        return rankMap.toSortedMap().values.toList()
+    }
+
 }
 
 fun main() {
-    No178871().solution2(
+    No178871().solution3(
         players = arrayOf("mumu", "soe", "poe", "kai", "mine"),
         callings = arrayOf("kai", "kai", "mine", "mine")
     )?.forEach { println(it) }
