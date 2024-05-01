@@ -30,7 +30,7 @@ public class No250137 {
             int nextAttackTime = attacks[i + 1][0];
             int bandageTime = nextAttackTime - attackTime - 1;
             leftHealth += (bandageTime * potion);
-            if ((bandageTime / (double) time) >= 1) { // TODO why (7 / 5) > 1 is false
+            if ((bandageTime / time) >= 1) {
                 leftHealth += (bandageTime / time) * bonus;
             }
             leftHealth = Math.min(health, leftHealth);
@@ -42,6 +42,10 @@ public class No250137 {
 class Main {
 
     public static void main(String[] args) {
+        int i = 7 / 5;
+        System.out.println(i);
+        System.out.println(i >= 1);
+        System.out.println((7 / 5) >= 1);
         System.out.println(new No250137().solution(
                         new int[]{4, 2, 7},
                         5,
