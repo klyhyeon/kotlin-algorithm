@@ -10,10 +10,11 @@ class Day01 {
             val line = scanner.nextLine()
             println(line)
             val twoNumbers = line.split("   ")
-            val firstNum = twoNumbers[0]
-            val secondNum = twoNumbers[1]
+            val firstNum = twoNumbers[0].toInt()
+            val secondNum = twoNumbers[1].toInt()
             println("first: $firstNum")
             println("second: $secondNum")
+            println(firstNum.plus(secondNum))
         }
         scanner.close()
     }
