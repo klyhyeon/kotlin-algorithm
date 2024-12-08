@@ -2,7 +2,6 @@ package advent
 
 import java.util.*
 import kotlin.math.abs
-import kotlin.math.absoluteValue
 
 class Day01 {
 
