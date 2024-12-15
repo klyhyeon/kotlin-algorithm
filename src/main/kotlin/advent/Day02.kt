@@ -59,74 +59,21 @@ class Day02 {
         while (scanner.hasNextLine()) {
             val line = scanner.nextLine()
             if (line == "") break
-            val levels = line.split(" ").map { it.toInt() }.toMutableList()
-            reports.add(levels)
+            setUpReport(line, reports)
         }
-        var currentLevel = 0
-        var previousLevel = 0
-        var isOperationNegative = false
-        var levelDistance = 0
         var result = 0
-        var unsafeCount = 0
+        var unsafeCount: Int
         for (i in reports.indices) {
             unsafeCount = 0
             val currentLevelList = reports[i]
-            for (j in 0 until currentLevelList.size) {
-                currentLevel = currentLevelList[j]
-                // first level
-                if (j == 0) {
-                    previousLevel = currentLevelList[j]
-                    continue
-                }
-                val distance = previousLevel.minus(currentLevel)
-                previousLevel = currentLevelList[j]
-                // all increasing/decreasing
-                if (j == 1) {
-                    isOperationNegative = distance < 0
-                } else {
-                    if (distance < 0 != isOperationNegative) {
-                        unsafeCount++
-                        break
-                    }
-                }
-                // adjacent 1~3
-                levelDistance = abs(distance)
-                if (levelDistance > 3 || levelDistance == 0) {
-                    unsafeCount++
-                    break
-                }
+            if (isUnsafe(currentLevelList)) {
+                unsafeCount++
             }
             if (unsafeCount > 0) {
                 for (k in 0 until currentLevelList.size) {
-                    unsafeCount = 0
                     val excludedArray = currentLevelList.toMutableList()
                     excludedArray.removeAt(k)
-                    for (l in 0 until excludedArray.size) {
-                        currentLevel = excludedArray[l]
-                        // first level
-                        if (l == 0) {
-                            previousLevel = excludedArray[l]
-                            continue
-                        }
-                        val distance = previousLevel.minus(currentLevel)
-                        previousLevel = excludedArray[l]
-                        // all increasing/decreasing
-                        if (l == 1) {
-                            isOperationNegative = distance < 0
-                        } else {
-                            if (distance < 0 != isOperationNegative) {
-                                unsafeCount++
-                                break
-                            }
-                        }
-                        // adjacent 1~3
-                        levelDistance = abs(distance)
-                        if (levelDistance > 3 || levelDistance == 0) {
-                            unsafeCount++
-                            break
-                        }
-                    }
-                    if (unsafeCount == 0) {
+                    if (!isUnsafe(excludedArray)) {
                         result++
                         break
                     }
@@ -137,6 +84,41 @@ class Day02 {
         }
         scanner.close()
         println("answer: $result")
+    }
+
+    private fun setUpReport(line: String, reports: MutableList<MutableList<Int>>) {
+        val levels = line.split(" ").map { it.toInt() }.toMutableList()
+        reports.add(levels)
+    }
+
+    private fun isUnsafe(currentLevelList: MutableList<Int>): Boolean {
+        var currentLevel: Int
+        var previousLevel = 0
+        var isOperationNegative = false
+        var levelDistance = 0
+        for (j in 0 until currentLevelList.size) {
+            currentLevel = currentLevelList[j]
+            // first level
+            if (j == 0) {
+                previousLevel = currentLevelList[j]
+                continue
+            }
+            val distance = previousLevel.minus(currentLevel)
+            previousLevel = currentLevelList[j]
+            // all increasing/decreasing
+            if (j == 1) {
+                isOperationNegative = distance < 0
+            } else {
+                if (distance < 0 != isOperationNegative) {
+                    return true
+                }
+            }
+            // adjacent 1~3
+            levelDistance = abs(distance)
+            if (levelDistance > 3 || levelDistance == 0)
+                return true
+        }
+        return false
     }
 }
 
